@@ -1,0 +1,45 @@
+<div *ngIf="order else invalidOrder">
+    <div class="mt-2 mb-2">
+        <a routerLink="/orders">&lt; back to orders page</a>
+    </div>
+    <div class="card">
+        <div class="card-title text-justify p-3">
+            <div class="row">
+                <div class="col-9">
+                    <h3>Order Details</h3>
+                    <h4>{{order.customerName}} - <span class="badge badge-primary"
+                            [appOrderStatus]="order.status">{{order.status}}</span></h4>
+                    <p><i class="fa fa-map-marker"></i>&nbsp;{{order.address}}</p>
+                    <button class="btn btn-primary" (click)="changeStatus(order._id)"
+                        [disabled]="order.status.toLowerCase()==='ready to serve'">Change Status&nbsp;<i
+                            class="fa fa-chevron-right"></i></button>
+
+                </div>
+                <div class="col-3">
+                    <h4 class="text-right">{{order.total | currency:'INR'}}</h4>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <h4>Items ({{order.quantity}})</h4>
+            <div class="list-group">
+                <div class="list-group-item" *ngFor="let item of order.items">
+                    <div class="row">
+                        <div class="col-1 pizza-img-container">
+                            <img class="pizza" src="{{item.photo}}" alt="{{item.name}}">
+                        </div>
+                        <div class="col-11">
+                            <p>
+                                <b>{{item.name}}</b>
+                            </p>
+                            <p>{{item.price | currency:'INR'}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #invalidOrder>
+    <h4 class="text-center">404 - Order Not Found !</h4>
+</ng-template>

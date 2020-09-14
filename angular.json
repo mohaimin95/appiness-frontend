@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "pizza-task"
+    }
+  },
+  "defaultProject": "pizza-task",
+  "cli": {
+    "analytics": false
+  }
 }
